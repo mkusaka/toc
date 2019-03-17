@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=development",
+    "build:production": "webpack --mode=production",
     "ci": "yarn run build",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "yarn run ci",
@@ -22,7 +23,7 @@
   },
   "homepage": "https://github.com/mkusaka/toc#readme",
   "devDependencies": {
-    "@types/glob": "^7.1.1",
+    "terser-webpack-plugin": "^1.2.3",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
