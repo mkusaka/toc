@@ -18,63 +18,63 @@ const patternString = process.argv[2];
 if (!patternString || patternString.length == 0) {
   console.log('glob pattern string to argument required.');
   process.exit(1);
-} else {
-  function asyncGlob(globPattern: string): Promise<string[]> {
-    return new Promise((resolve, reject) => {
-      return glob(globPattern, function(err, files) {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(files);
-      });
-    })
-  }
+}
 
-  asyncGlob(patternString)
-    .then((paths: string[]) => {
-      return paths.map(path => {
+export function asyncGlob(globPattern: string): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    return glob(globPattern, function(err, files) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(files);
+    });
+  })
+}
+
+asyncGlob(patternString)
+  .then((paths: string[]) => {
+    return paths.map(path => {
+      return {
+        path: path,
+        content: fs.readFileSync(path, { encoding: 'UTF-8' })
+      };
+    })
+  })
+  .then((contents: {
+    path: string,
+    content: string
+  }[]) => {
+    return contents.map(
+      ({ path, content }): { path: string; ast: parsedAst } => {
         return {
           path: path,
-          content: fs.readFileSync(path, { encoding: 'UTF-8' })
+          ast: mdParser.parse(content)
         };
-      })
-    })
-    .then((contents: {
-      path: string,
-      content: string
-    }[]) => {
-      return contents.map(
-        ({ path, content }): { path: string; ast: parsedAst } => {
+      }
+    );
+  })
+  .then(asts => {
+    return asts.map(({ path, ast }) => {
+      return {
+        filePath: path,
+        headers: ast.children.filter(e => e.type === mdParser.Syntax.Header).map(e => {
           return {
-            path: path,
-            ast: mdParser.parse(content)
-          };
-        }
-      );
-    })
-    .then(asts => {
-      return asts.map(({ path, ast }) => {
-        return {
-          filePath: path,
-          headers: ast.children.filter(e => e.type === mdParser.Syntax.Header).map(e => {
-            return {
-              value: e.children[0].value,
-              depth: e.depth
-            }
-          })
-        }
-      }).filter(e => e.headers.length > 0);
-    })
-    .then(contentFiles => {
-      return contentFiles.map(({ filePath, headers }) => {
-        const headersText = headers.map(({ value, depth }) => {
-          const indent = ' '.repeat(depth);
-          return `${indent}- [${value}](${filePath}#${encodeURI(value)})`
-        }).join("\n")
-        return `[${filePath.replace(path.extname(filePath), "")}](${filePath})
+            value: e.children[0].value,
+            depth: e.depth
+          }
+        })
+      }
+    }).filter(e => e.headers.length > 0);
+  })
+  .then(contentFiles => {
+    return contentFiles.map(({ filePath, headers }) => {
+      const headersText = headers.map(({ value, depth }) => {
+        const indent = ' '.repeat(depth);
+        return `${indent}- [${value}](${filePath}#${encodeURI(value)})`
+      }).join("\n")
+      return `[${filePath.replace(path.extname(filePath), "")}](${filePath})
 ${headersText}
 `
-      }).join("\n")
-    })
-    .then(e => console.log(e));
-}
+    }).join("\n")
+  })
+  .then(e => console.log(e));
