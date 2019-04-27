@@ -1,7 +1,7 @@
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: __dirname + '/dist',
     filename: 'index.js'
@@ -18,7 +18,6 @@ module.exports = {
   },
   resolve: {
     extensions: [
-      '.tsx',
       '.ts',
       '.js'
     ]

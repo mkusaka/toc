@@ -1,15 +1,25 @@
-const glob = require('glob');
-const mdParser = require('@textlint/markdown-to-ast');
-const fs = require('fs');
-const path = require('path');
+import * as glob from "glob";
+import * as mdParser from "@textlint/markdown-to-ast";
+import * as fs from 'fs';
+import * as path from 'path';
+
+interface parsedAst {
+  children: {
+    type: string,
+    children: {
+      value: string,
+    }[],
+    depth: number
+  }[],
+}
 
 const patternString = process.argv[2];
 
-function asyncGlob(globPattern) {
+function asyncGlob(globPattern: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
-    return glob(globPattern, function (err, files) {
+    return glob(globPattern, function(err, files) {
       if (err) {
-        return reject(err)
+        return reject(err);
       }
       return resolve(files);
     });
@@ -17,7 +27,7 @@ function asyncGlob(globPattern) {
 }
 
 asyncGlob(patternString)
-  .then(paths => {
+  .then((paths: string[]) => {
     return paths.map(path => {
       return {
         path: path,
@@ -25,13 +35,18 @@ asyncGlob(patternString)
       };
     })
   })
-  .then(contents => {
-    return contents.map(({ path, content }) => {
-      return {
-        path: path,
-        ast: mdParser.parse(content)
-      };
-    })
+  .then((contents: {
+    path: string,
+    content: string
+  }[]) => {
+    return contents.map(
+      ({ path, content }): { path: string; ast: parsedAst } => {
+        return {
+          path: path,
+          ast: mdParser.parse(content)
+        };
+      }
+    );
   })
   .then(asts => {
     return asts.map(({ path, ast }) => {
