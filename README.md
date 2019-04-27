@@ -47,7 +47,7 @@ document/nested/sample3.md
 
 then output like follow.
 ```bash
-$ toc document/*.md
+$ node node_modules/@mkusaka/toc/dist/index.js document/**/*.md
 [document/nested/sample3](document/nested/sample3.md)
  - [some3](document/nested/sample3.md#some3)
  - [markdown3](document/nested/sample3.md#markdown3)
