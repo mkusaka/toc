@@ -17,14 +17,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
-  },
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        exclude: /node_modules/,
-        cache: true
-      })
-    ],
-  },
+    extensions: [
+      '.tsx',
+      '.ts',
+      '.js'
+    ]
+  }
 };
