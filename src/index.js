@@ -16,28 +16,6 @@ function asyncGlob(globPattern) {
   })
 }
 
-/*
-function isArray(obj) {
-  return Object.prototype.toString.call(obj) === "[object Array]";
-}
-
-function flat(obj) {
-  if (!isArray(obj)) return obj;
-
-  const out = [];
-  obj.forEach(e => {
-    if (isArray(e)) {
-      e.forEach(c => {
-        out.push(c)
-      })
-    } else {
-      out.push(e)
-    }
-  })
-  return out
-}
-*/
-
 asyncGlob(patternString)
   .then(paths => {
     return paths.map(path => {
