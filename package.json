@@ -39,5 +39,9 @@
   },
   "bin": {
     "mdoctoc": "bin/mdoctoc"
-  }
+  },
+  "keywords": [
+    "toc",
+    "markdown"
+  ]
 }
