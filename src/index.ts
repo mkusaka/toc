@@ -1,7 +1,7 @@
 import * as glob from "glob";
 import * as mdParser from "@textlint/markdown-to-ast";
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
 export interface parsedAst {
   children: {
@@ -18,7 +18,7 @@ const patternString = process.argv[2];
 export function asyncGlob(globPattern: string = patternString): Promise<string[]> {
   return new Promise((resolve, reject) => {
     if (!globPattern || globPattern.length == 0) {
-      console.log('glob pattern string to argument required.');
+      console.log("glob pattern string to argument required.");
       return reject();
     }
 
@@ -37,7 +37,7 @@ export const globAsts = (pattern = patternString) => {
       return paths.map(path => {
         return {
           path: path,
-          content: fs.readFileSync(path, { encoding: 'UTF-8' })
+          content: fs.readFileSync(path, { encoding: "UTF-8" })
         };
       });
     })
