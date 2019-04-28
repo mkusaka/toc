@@ -96,3 +96,5 @@ $ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md" "document/READ
 - validate globed file extension (may need `.md` only)
 - add sort option
 - add show depth option
+- deal with relative file
+  - ex: `document/first/sample.md` (with content only `# foo`), `document/second/README.md`. `node script.js "document/**/*.md" "document/second/README.md"` then expected output path for `sample.md` is `[foo](../first/sample.md#foo`.
