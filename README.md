@@ -1,4 +1,11 @@
 # toc
+## table of contents
+[README](README.md)
+ - [toc](README.md#toc)
+ - [install](README.md#install)
+ - [useage](README.md#useage)
+ - [example](README.md#example)
+ - [TODO](README.md#TODO)
 
 generate multiple markdwon document link cli.
 
