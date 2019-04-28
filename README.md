@@ -1,11 +1,11 @@
 # toc
 ## table of contents
-[README](README.md)
- - [toc](README.md#toc)
- - [install](README.md#install)
- - [useage](README.md#useage)
- - [example](README.md#example)
- - [TODO](README.md#TODO)
+ - [toc](#toc)
+  - [table of contents](#table%20of%20contents)
+ - [install](#install)
+ - [useage](#useage)
+ - [example](#example)
+ - [TODO](#TODO)
 
 generate multiple markdwon document link cli.
 
@@ -54,21 +54,41 @@ document/nested/sample3.md
 
 then output like follow.
 ```bash
-$ node node_modules/@mkusaka/toc/dist/index.js document/**/*.md
-[document/nested/sample3](document/nested/sample3.md)
- - [some3](document/nested/sample3.md#some3)
- - [markdown3](document/nested/sample3.md#markdown3)
-  - [like this3](document/nested/sample3.md#like%20this3)
+$ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md"
+[document/nested/sample3](./document/nested/sample3.md)
+ - [some3](./document/nested/sample3.md#some3)
+ - [markdown3](./document/nested/sample3.md#markdown3)
+  - [like this3](./document/nested/sample3.md#like%20this3)
 
-[document/sample](document/sample.md)
- - [some](document/sample.md#some)
- - [markdown](document/sample.md#markdown)
-  - [like this](document/sample.md#like%20this)
+[document/sample](./document/sample.md)
+ - [some](./document/sample.md#some)
+ - [markdown](./document/sample.md#markdown)
+  - [like this](./document/sample.md#like%20this)
 
-[document/sample2](document/sample2.md)
- - [some2](document/sample2.md#some2)
- - [markdown2](document/sample2.md#markdown2)
-  - [like this2](document/sample2.md#like%20this2)
+[document/sample2](./document/sample2.md)
+ - [some2](./document/sample2.md#some2)
+ - [markdown2](./document/sample2.md#markdown2)
+  - [like this2](./document/sample2.md#like%20this2)
+```
+
+if above toc shown at document/readme.md, we can specify it and script returns better toc path.
+
+```bash
+$ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md" "document/README.md"
+[nestedsample3](./nestedsample3.md)
+ - [some3](./nestedsample3.md#some3)
+ - [markdown3](./nestedsample3.md#markdown3)
+  - [like this3](./nestedsample3.md#like%20this3)
+
+[sample](./sample.md)
+ - [some](./sample.md#some)
+ - [markdown](./sample.md#markdown)
+  - [like this](./sample.md#like%20this)
+
+[sample2](./sample2.md)
+ - [some2](./sample2.md#some2)
+ - [markdown2](./sample2.md#markdown2)
+  - [like this2](./sample2.md#like%20this2)
 ```
 
 # TODO
