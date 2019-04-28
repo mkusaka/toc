@@ -90,3 +90,5 @@ ${headersText}
 export const standardStream = (pattern = patternString) => {
   return md(pattern).then(e => console.log(e))
 }
+
+standardStream()
