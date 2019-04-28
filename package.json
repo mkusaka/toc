@@ -5,8 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=development",
-    "build:production": "webpack --mode=production",
+    "build": "tsc",
     "ci": "yarn run build",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "yarn run ci",
@@ -25,10 +24,7 @@
   "devDependencies": {
     "@types/glob": "^7.1.1",
     "@types/node": "^11.13.8",
-    "ts-loader": "^5.3.3",
-    "typescript": "^3.3.3333",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "typescript": "^3.3.3333"
   },
   "dependencies": {
     "@textlint/markdown-to-ast": "^6.1.2",
