@@ -75,3 +75,4 @@ $ node node_modules/@mkusaka/toc/dist/index.js document/**/*.md
 - use [tj/commander.js: node.js command-line interfaces made easy](https://github.com/tj/commander.js/)
 - validate globed file extension (may need `.md` only)
 - add sort option
+- add show depth option
