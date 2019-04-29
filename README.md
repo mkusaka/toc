@@ -98,3 +98,4 @@ $ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md" "document/READ
 - add show depth option
 - deal with relative file
   - ex: `document/first/sample.md` (with content only `# foo`), `document/second/README.md`. `node script.js "document/**/*.md" "document/second/README.md"` then expected output path for `sample.md` is `[foo](../first/sample.md#foo)`.
+- add tests
