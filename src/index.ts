@@ -14,9 +14,9 @@ export interface parsedAst {
 }
 
 const patternString = process.argv[2];
-const aggregateFilePath = process.argv[3];
+const aggregateFilePath = process.argv[3] || "./"; // if not setted aggregateFilePath, glob response unexpected file array.
 
-export function asyncGlob(globPattern: string = patternString, aggregateFile: string = aggregateFilePath): Promise<{aggregateFile: string, paths: string[]}> {
+export function asyncGlob(globPattern: string = patternString, aggregateFile: string = aggregateFilePath): Promise<{ aggregateFile: string, paths: string[] }> {
   return new Promise((resolve, reject) => {
     if (!globPattern || globPattern.length == 0) {
       console.log("glob pattern string to argument required.");
@@ -91,6 +91,7 @@ export const md = (pattern = patternString) => {
       let fixedFilePath = filePath;
       const aggregate = aggregateFile && aggregateFile.length > 0 ? aggregateFile.split('/') : [];
       if (aggregate.length > 0) {
+        // TODO: deal with one path './some/folder' and the other path 'some/folder' pattern.
         const aggregated = filePath.split('/');
         const min = Math.min(...[aggregate, aggregated].map(e => e.length));
         for (let i = 0; i < min; i++) {
@@ -118,5 +119,3 @@ ${headersText}
 export const standardStream = (pattern = patternString) => {
   return md(pattern).then(e => console.log(e))
 }
-
-standardStream()
