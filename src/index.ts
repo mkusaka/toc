@@ -15,6 +15,7 @@ export interface parsedAst {
 
 const patternString = process.argv[2];
 const aggregateFilePath = process.argv[3] || "./"; // if not setted aggregateFilePath, glob response unexpected file array.
+const showDepth = parseInt(process.argv[4]);
 
 export function asyncGlob(globPattern: string = patternString, aggregateFile: string = aggregateFilePath): Promise<{ aggregateFile: string, paths: string[] }> {
   return new Promise((resolve, reject) => {
@@ -78,6 +79,7 @@ export const globAstlike = (pattern = patternString, aggregateFile: string = agg
                   depth: e.depth
                 };
               })
+              .filter(({ depth }) => showDepth ? depth <= showDepth : true )
           };
         })
         .filter(e => e.headers.length > 0)
