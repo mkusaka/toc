@@ -75,10 +75,10 @@ if above toc shown at document/readme.md, we can specify it and script returns b
 
 ```bash
 $ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md" "document/README.md"
-[nestedsample3](./nestedsample3.md)
- - [some3](./nestedsample3.md#some3)
- - [markdown3](./nestedsample3.md#markdown3)
-  - [like this3](./nestedsample3.md#like%20this3)
+[nested/sample3](./nested/sample3.md)
+ - [some3](./nested/sample3.md#some3)
+ - [markdown3](./nested/sample3.md#markdown3)
+  - [like this3](./nested/sample3.md#like%20this3)
 
 [sample](./sample.md)
  - [some](./sample.md#some)
@@ -97,4 +97,4 @@ $ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md" "document/READ
 - add sort option
 - add show depth option
 - deal with relative file
-  - ex: `document/first/sample.md` (with content only `# foo`), `document/second/README.md`. `node script.js "document/**/*.md" "document/second/README.md"` then expected output path for `sample.md` is `[foo](../first/sample.md#foo`.
+  - ex: `document/first/sample.md` (with content only `# foo`), `document/second/README.md`. `node script.js "document/**/*.md" "document/second/README.md"` then expected output path for `sample.md` is `[foo](../first/sample.md#foo)`.
