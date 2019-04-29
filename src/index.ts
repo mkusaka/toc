@@ -89,6 +89,7 @@ export const md = (pattern = patternString) => {
   return globAstlike(pattern).then(({ aggregateFile, contentFiles }) => {
     return contentFiles.map(({ filePath, headers }) => {
       let fixedFilePath = filePath;
+      // TODO: isArrregateFile? like varable as `aggregateFile && aggregateFile.length > 0` to refactor some shared variable.
       const aggregate = aggregateFile && aggregateFile.length > 0 ? aggregateFile.split('/') : [];
       if (aggregate.length > 0) {
         // TODO: deal with one path './some/folder' and the other path 'some/folder' pattern.
@@ -105,7 +106,7 @@ export const md = (pattern = patternString) => {
         fixedFilePath = aggregated.join('/');
       }
       const headersText = headers.map(({ value, depth }) => {
-        const indent = " ".repeat(depth);
+        const indent = "  ".repeat(depth - 1);
         return `${indent}- [${value}](${fixedFilePath && fixedFilePath.length > 0 ? `./${fixedFilePath}` : "" }#${encodeURI(value)})`;
       }).join("\n")
       const fileMdPathText = fixedFilePath && fixedFilePath.length > 0 ? `[${fixedFilePath.replace(path.extname(fixedFilePath), "")}](./${fixedFilePath})` : "";
