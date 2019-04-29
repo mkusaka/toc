@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@textlint/markdown-to-ast": "^6.1.2",
+    "commander": "^2.20.0",
     "glob": "^7.1.3"
   },
   "publishConfig": {
