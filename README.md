@@ -1,4 +1,4 @@
-# toc
+# @mkusaka/toc
 ## table of contents
  - [toc](#toc)
   - [table of contents](#table%20of%20contents)
@@ -11,9 +11,10 @@ generate multiple markdwon document link cli.
 
 # install
 
-(cli is under development...)
 ```bash
-yarn add @mkusaka/toc
+yarn global add @mkusaka/toc
+# or
+npm instlal -g @mkusaka/toc
 ```
 
 # useage
@@ -22,7 +23,7 @@ cd /path/to/folder
 install, and run
 
 ```bash
-node node_modules/@mkusaka/toc/dist/index.js "glob pattern"
+mdoctoc "glob pattern"
 ```
 
 then markdown link comes to standard streams.
@@ -54,7 +55,7 @@ document/nested/sample3.md
 
 then output like follow.
 ```bash
-$ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md"
+$ mdoctoc "document/**/*.md"
 [document/nested/sample3](./document/nested/sample3.md)
  - [some3](./document/nested/sample3.md#some3)
  - [markdown3](./document/nested/sample3.md#markdown3)
@@ -74,7 +75,7 @@ $ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md"
 if above toc shown at document/readme.md, we can specify it and script returns better toc path.
 
 ```bash
-$ node node_modules/@mkusaka/toc/dist/index.js "document/**/*.md" "document/README.md"
+$ mdoctoc "document/**/*.md" "document/README.md"
 [nested/sample3](./nested/sample3.md)
  - [some3](./nested/sample3.md#some3)
  - [markdown3](./nested/sample3.md#markdown3)
