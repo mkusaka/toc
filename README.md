@@ -92,6 +92,24 @@ $ mdoctoc "document/**/*.md" "document/README.md"
   - [like this2](./sample2.md#like%20this2)
 ```
 
+if you want filter depth(# → depth 1, ## → depth 2). run like follow
+
+```bash
+# (sorry, second "./" argument required if use depth option right now... it will be option using commander.js)
+$ mdoctoc "document/**/*.md" "./" 1
+[document/nested/sample3](./document/nested/sample3.md)
+- [some3](./document/nested/sample3.md#some3)
+- [markdown3](./document/nested/sample3.md#markdown3)
+
+[document/sample](./document/sample.md)
+- [some](./document/sample.md#some)
+- [markdown](./document/sample.md#markdown)
+
+[document/sample2](./document/sample2.md)
+- [some2](./document/sample2.md#some2)
+- [markdown2](./document/sample2.md#markdown2)
+```
+
 # TODO
 - use [tj/commander.js: node.js command-line interfaces made easy](https://github.com/tj/commander.js/)
 - validate globed file extension (may need `.md` only)
