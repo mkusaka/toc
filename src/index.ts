@@ -34,8 +34,8 @@ export function asyncGlob(globPattern: string = patternString, aggregateFile: st
   })
 }
 
-export const globAsts = (pattern = patternString) => {
-  return asyncGlob(pattern)
+export const globAsts = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
+  return asyncGlob(pattern, aggregateFile)
     .then(({ aggregateFile, paths }) => {
       return {
         aggregateFile,
@@ -62,8 +62,8 @@ export const globAsts = (pattern = patternString) => {
     });
 }
 
-export const globAstlike = (pattern = patternString) => {
-  return globAsts(pattern).then(({ aggregateFile, asts }) => {
+export const globAstlike = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
+  return globAsts(pattern, aggregateFile).then(({ aggregateFile, asts }) => {
     return {
       aggregateFile,
       contentFiles: asts
@@ -85,8 +85,8 @@ export const globAstlike = (pattern = patternString) => {
   });
 }
 
-export const md = (pattern = patternString) => {
-  return globAstlike(pattern).then(({ aggregateFile, contentFiles }) => {
+export const md = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
+  return globAstlike(pattern, aggregateFile).then(({ aggregateFile, contentFiles }) => {
     return contentFiles.map(({ filePath, headers }) => {
       let fixedFilePath = filePath;
       // TODO: isArrregateFile? like varable as `aggregateFile && aggregateFile.length > 0` to refactor some shared variable.
@@ -117,6 +117,6 @@ ${headersText}
   });
 }
 
-export const standardStream = (pattern = patternString) => {
-  return md(pattern).then(e => console.log(e))
+export const standardStream = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
+  return md(pattern, aggregateFile).then(e => console.log(e));
 }
