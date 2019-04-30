@@ -14,7 +14,7 @@ generate multiple markdwon document link cli.
 ```bash
 yarn global add @mkusaka/toc
 # or
-npm instlal -g @mkusaka/toc
+npm install -g @mkusaka/toc
 ```
 
 # useage
