@@ -87,25 +87,29 @@ export const globAstlike = (pattern = patternString, aggregateFile: string = agg
   });
 }
 
+const relativeStrings = [".", ".."];
+const removeRelativePath = (pathArray: string[]) => pathArray.filter(path => !relativeStrings.includes(path));
+
 export const md = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
   return globAstlike(pattern, aggregateFile).then(({ aggregateFile, contentFiles }) => {
     return contentFiles.map(({ filePath, headers }) => {
       let fixedFilePath = filePath;
       // TODO: isArrregateFile? like varable as `aggregateFile && aggregateFile.length > 0` to refactor some shared variable.
-      const aggregate = aggregateFile && aggregateFile.length > 0 ? aggregateFile.split('/') : [];
-      if (aggregate.length > 0) {
-        // TODO: deal with one path './some/folder' and the other path 'some/folder' pattern.
-        const aggregated = filePath.split('/');
-        const min = Math.min(...[aggregate, aggregated].map(e => e.length));
+      const aggregate = aggregateFile && aggregateFile.length > 0 ? aggregateFile.split("/") : [];
+      const removeRelativeStringAggregate = removeRelativePath(aggregate)
+      if (removeRelativeStringAggregate.length > 0) {
+        const aggregated = filePath.split("/");
+        const removeRelativeStringAggregated = removeRelativePath(aggregated)
+        const min = Math.min(...[removeRelativeStringAggregate, removeRelativeStringAggregated].map(e => e.length));
         for (let i = 0; i < min; i++) {
-          if (aggregate[0] === aggregated[0]) {
-            aggregated.shift();
-            aggregate.shift();
+          if (removeRelativeStringAggregate[0] === removeRelativeStringAggregate[0]) {
+            removeRelativeStringAggregated.shift();
+            removeRelativeStringAggregate.shift();
           } else {
-            ;
+            break;
           }
         }
-        fixedFilePath = aggregated.join('/');
+        fixedFilePath = removeRelativeStringAggregated.join("/");
       }
       const headersText = headers.map(({ value, depth }) => {
         const indent = "  ".repeat(depth - 1);
