@@ -1,4 +1,4 @@
-import * as glob from "glob";
+import * as fg from "fast-glob";
 import * as mdParser from "@textlint/markdown-to-ast";
 import * as fs from "fs";
 import * as path from "path";
@@ -17,33 +17,21 @@ const patternString = process.argv[2];
 const aggregateFilePath = process.argv[3] || "./"; // if not setted aggregateFilePath, glob response unexpected file array.
 const showDepth = parseInt(process.argv[4]);
 
-export function asyncGlob(globPattern: string = patternString, aggregateFile: string = aggregateFilePath): Promise<{ aggregateFile: string, paths: string[] }> {
-  return new Promise((resolve, reject) => {
-    if (!globPattern || globPattern.length == 0) {
-      console.log("glob pattern string to argument required.");
-      return reject();
-    }
-    return glob(globPattern, function(err, paths) {
-      if (err) {
-        return reject(err);
-      }
-      return resolve({
-        aggregateFile,
-        paths: paths
-      });
-    });
-  })
-}
-
 export const globAsts = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
-  return asyncGlob(pattern, aggregateFile)
+  return fg.async(pattern)
+    .then(paths => {
+      return {
+        aggregateFile: aggregateFilePath,
+        paths
+      };
+    })
     .then(({ aggregateFile, paths }) => {
       return {
         aggregateFile,
         contents: paths.map(path => {
           return {
-            path: path,
-            content: fs.readFileSync(path, { encoding: 'UTF-8' })
+            path: path as string,
+            content: fs.readFileSync(path as string, { encoding: 'UTF-8' })
           };
         })
       };
