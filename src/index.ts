@@ -14,7 +14,7 @@ export interface parsedAst {
 }
 
 const patternString = process.argv[2];
-const aggregateFilePath = process.argv[3] || "./"; // if not setted aggregateFilePath, glob response unexpected file array.
+const aggregateFilePath = process.argv[3];
 const showDepth = parseInt(process.argv[4]);
 
 export const globAsts = (pattern = patternString, aggregateFile: string = aggregateFilePath) => {
