@@ -1,6 +1,6 @@
 {
   "name": "@mkusaka/toc",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "toc for multiple markdown document",
   "main": "dist/index.js",
   "scripts": {
