@@ -8,7 +8,7 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "ci": "yarn run build",
-    "postversion": "git push && git push --tags",
+    "postversion": "git push --tags",
     "prepublishOnly": "yarn run ci",
     "preversion": "yarn run ci"
   },
