@@ -1,9 +1,9 @@
 # @mkusaka/toc
 ## table of contents
-- [@mkusaka/toc](#@mkusaka/toc)
-  - [table of contents](#table%20of%20contents)
+- [@mkusaka/toc](#mkusakatoc)
+  - [table of contents](#table-of-contents)
 - [install](#install)
-- [useage](#useage)
+- [usage](#usage)
 - [example](#example)
 - [TODO](#TODO)
 
