@@ -101,7 +101,7 @@ export const md = (pattern = patternString, aggregateFile: string = aggregateFil
       }
       const headersText = headers.map(({ value, depth }) => {
         const indent = "  ".repeat(depth - 1);
-        return `${indent}- [${value}](${fixedFilePath && fixedFilePath.length > 0 ? `./${fixedFilePath}` : ""}#${value.replace(/@|\//g, "").replace(/ /g, "-")})`;
+        return `${indent}- [${value}](${fixedFilePath && fixedFilePath.length > 0 ? `./${fixedFilePath}` : ""}#${encodeURI(value.replace(/@|\//g, "").replace(/ /g, "-"))})`;
       }).join("\n")
       const fileMdPathText = fixedFilePath && fixedFilePath.length > 0 ? `[${fixedFilePath.replace(path.extname(fixedFilePath), "")}](./${fixedFilePath})` : "";
       return `${fileMdPathText}
