@@ -67,7 +67,7 @@ export const globAstlike = (pattern = patternString, aggregateFile: string = agg
                   depth: e.depth
                 };
               })
-              .filter(({ depth }) => showDepth ? depth <= showDepth : true )
+              .filter(({ depth }) => showDepth ? depth <= showDepth : true)
           };
         })
         .filter(e => e.headers.length > 0)
@@ -101,7 +101,7 @@ export const md = (pattern = patternString, aggregateFile: string = aggregateFil
       }
       const headersText = headers.map(({ value, depth }) => {
         const indent = "  ".repeat(depth - 1);
-        return `${indent}- [${value}](${fixedFilePath && fixedFilePath.length > 0 ? `./${fixedFilePath}` : "" }#${encodeURI(value)})`;
+        return `${indent}- [${value}](${fixedFilePath && fixedFilePath.length > 0 ? `./${fixedFilePath}` : ""}#${value.replace(/@|\//g, "").replace(/ /g, "-")})`;
       }).join("\n")
       const fileMdPathText = fixedFilePath && fixedFilePath.length > 0 ? `[${fixedFilePath.replace(path.extname(fixedFilePath), "")}](./${fixedFilePath})` : "";
       return `${fileMdPathText}

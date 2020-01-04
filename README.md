@@ -17,7 +17,7 @@ yarn global add @mkusaka/toc
 npm install -g @mkusaka/toc
 ```
 
-# useage
+# usage
 cd /path/to/folder
 
 install, and run
