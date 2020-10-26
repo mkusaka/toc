@@ -25,6 +25,11 @@ install, and run
 ```bash
 mdoctoc "glob pattern"
 ```
+or
+
+```bash
+npx @mkusaka/toc "path to folder"
+```
 
 then markdown link comes to standard streams.
 
