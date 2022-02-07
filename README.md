@@ -1,4 +1,7 @@
 # @mkusaka/toc
+
+_DEPRECATED_ this repository does not under active development.
+
 ## table of contents
 - [@mkusaka/toc](#mkusakatoc)
   - [table of contents](#table-of-contents)
